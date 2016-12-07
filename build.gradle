@@ -1,0 +1,36 @@
+// Gradle plugins 
+plugins {
+	id 'java'
+	id 'eclipse'
+	id 'idea'
+}
+
+// character encoding
+tasks.withType(AbstractCompile)*.options*.encoding = "UTF-8"
+
+// Java version compliance
+sourceCompatibility = targetCompatibility = 1.8
+
+// name of the projects
+def projectName = 'MP_VC_Ue01_Swing'
+eclipse.project.name = projectName
+idea.module.name = projectName
+
+// where to get the dependencies
+repositories {
+    mavenCentral()
+}
+
+// dependencies
+dependencies {
+	compile fileTree('lib');			// all jars in the lib directory
+	testCompile 'junit:junit:4.+';		// jUnit for unit tests
+}
+
+/**
+ * creates the gradlew.bat and gradlew.sh file
+ */
+task wrapper(type: Wrapper) {
+    gradleVersion = "2.14";
+	distributionUrl = "https://services.gradle.org/distributions/gradle-2.14-all.zip";
+}
